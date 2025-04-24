@@ -36,11 +36,11 @@ export default function Sidebar() {
           <Box sx={{ display: "flex", alignItems: "center", padding: 2 }}>
             <img
               src={Logo}
-              alt="Repz Logo"
-              style={{ height: 58, marginRight: 25 }}
+              alt="Form Lab Logo"
+              style={{ height: 58, marginRight: 25, borderRadius: 8 }}
             />
             <Typography variant="h6" noWrap>
-              Repz
+              Form Lab
             </Typography>
           </Box>
         </NavLink>
