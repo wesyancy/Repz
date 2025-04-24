@@ -1,0 +1,41 @@
+/* sidebar.css */
+
+.sidebar-drawer {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.sidebar-drawer .MuiDrawer-paper {
+    width: 240px;
+    box-sizing: border-box;
+    background-color: #404040;
+    color: white;
+}
+
+.sidebar-box {
+    overflow: auto;
+}
+
+.sidebar-navlink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar-logo {
+    height: 58px;
+    margin-right: 25px;
+    border-radius: 8px;
+}
+
+.sidebar-listitem {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sidebar-listitem.active {
+    font-weight: bold;
+}
+
+.sidebar-listitem:hover {
+    background-color: #555;
+}
