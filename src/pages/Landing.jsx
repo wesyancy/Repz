@@ -1,7 +1,7 @@
 export default function Landing() {
     return (
         <>
-            <h2>Welcome to Form Lab</h2>
+            <h2>Welcome to LoadUP</h2>
             <p>
                 The first step in building a stronger, smarter version of you.
                 We’ve stripped out the guesswork—so you can train with purpose,

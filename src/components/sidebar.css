@@ -17,7 +17,9 @@
 }
 
 .sidebar-navlink {
+    letter-spacing: 1px;
     text-decoration: none;
+    font-style: italic;
     color: inherit;
 }
 
@@ -38,4 +40,10 @@
 
 .sidebar-listitem:hover {
     background-color: #555;
+}
+
+.sidebar-item-icon {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
 }
