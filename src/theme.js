@@ -40,6 +40,7 @@ const theme = createTheme({
             styleOverrides: {
                 paper: {
                     backgroundColor: '#1e1e1e',
+                    width: "50%",
                 },
             },
         },

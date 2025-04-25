@@ -26,6 +26,26 @@ const dayOptions = [
     'Sunday',
 ];
 
+const RenderButton = ({
+    label,
+    onClick,
+    variant = 'contained',
+    color = 'primary',
+    size = 'medium',
+    style = {},
+    disabled = false,
+}) => (
+    <Button
+        onClick={onClick}
+        variant={variant}
+        color={color}
+        size={size}
+        style={style}
+        disabled={disabled}>
+        {label}
+    </Button>
+);
+
 const BuildWorkout = () => {
     const [workouts, setWorkouts] = useState([
         { id: 1, day: 'Monday', exercises: [] },
@@ -104,19 +124,22 @@ const BuildWorkout = () => {
                 wrap="nowrap"
                 style={{ overflowX: 'auto' }}>
                 {workouts.map((workout) => (
-                    <Grid item key={workout.id}>
+                    <Grid
+                        // item
+                        key={workout.id}>
                         <Card style={{ minWidth: 300 }}>
                             <CardContent>
-                                <Button
+                                <RenderButton
+                                    label="Delete Day"
                                     onClick={() => handleDeleteDay(workout.id)}
                                     color="error"
                                     size="small"
+                                    variant="outlined"
                                     style={{
                                         float: 'right',
                                         marginBottom: '0.5rem',
-                                    }}>
-                                    Delete Day
-                                </Button>
+                                    }}
+                                />
                                 <FormControl fullWidth>
                                     <InputLabel id={`day-label-${workout.id}`}>
                                         Day
@@ -157,39 +180,40 @@ const BuildWorkout = () => {
                                             </Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Button
+                                            <RenderButton
+                                                label="Delete"
                                                 onClick={() =>
                                                     handleDeleteExercise(
                                                         workout.id,
                                                         idx
                                                     )
                                                 }
+                                                variant="outlined"
                                                 color="error"
-                                                size="small">
-                                                Delete
-                                            </Button>
+                                                size="small"
+                                            />
                                         </Grid>
                                     </Grid>
                                 ))}
-
-                                <Button
+                                <RenderButton
+                                    label="Add Exercise"
                                     onClick={() => openModal(workout.id)}
                                     variant="outlined"
                                     color="primary"
-                                    style={{ marginTop: '1rem' }}>
-                                    Add Exercise
-                                </Button>
+                                    size="small"
+                                    style={{ marginTop: '1rem' }}
+                                />
                             </CardContent>
                         </Card>
                     </Grid>
                 ))}
-                <Grid item>
-                    <Button
+                <Grid>
+                    <RenderButton
+                        label="Add Day"
                         onClick={handleAddDay}
-                        variant="contained"
-                        style={{ height: '100%' }}>
-                        Add Day
-                    </Button>
+                        variant="outlined"
+                        style={{ height: '100%' }}
+                    />
                 </Grid>
             </Grid>
 
@@ -234,10 +258,15 @@ const BuildWorkout = () => {
                     )}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={closeModal}>Cancel</Button>
+                    <Button
+                        onClick={closeModal}
+                        variant="outlined"
+                        color="error">
+                        Cancel
+                    </Button>
                     <Button
                         onClick={handleAddExercise}
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
                         disabled={!selectedGroup || !selectedExercise}>
                         Add

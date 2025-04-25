@@ -13,7 +13,6 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<Landing />} />
-                {/* <Route path="landing" element={<Landing />} /> */}
                 <Route path="currentworkout" element={<CurrentWorkout />} />
                 <Route path="workouts" element={<Workouts />} />
                 <Route path="addexercise" element={<AddExercise />} />
