@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import exerciseBank from '../data/exerciseBank';
+import RenderButton from '../components/UI/RenderButton';
+import RenderSelect from '../components/UI/RenderSelect';
 import {
     Dialog,
     DialogTitle,
     DialogContent,
     DialogActions,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    Button,
     Card,
     CardContent,
     Typography,
@@ -26,30 +23,8 @@ const dayOptions = [
     'Sunday',
 ];
 
-const RenderButton = ({
-    label,
-    onClick,
-    variant = 'contained',
-    color = 'primary',
-    size = 'medium',
-    style = {},
-    disabled = false,
-}) => (
-    <Button
-        onClick={onClick}
-        variant={variant}
-        color={color}
-        size={size}
-        style={style}
-        disabled={disabled}>
-        {label}
-    </Button>
-);
-
 const BuildWorkout = () => {
-    const [workouts, setWorkouts] = useState([
-        { id: 1, day: 'Monday', exercises: [] },
-    ]);
+    const [workouts, setWorkouts] = useState([{ id: 1, day: 'Monday', exercises: [] }]);
     const [modalOpen, setModalOpen] = useState(false);
     const [activeWorkoutId, setActiveWorkoutId] = useState(null);
     const [selectedGroup, setSelectedGroup] = useState('');
@@ -61,9 +36,7 @@ const BuildWorkout = () => {
     };
 
     const handleDayChange = (id, newDay) => {
-        setWorkouts(
-            workouts.map((w) => (w.id === id ? { ...w, day: newDay } : w))
-        );
+        setWorkouts(workouts.map((w) => (w.id === id ? { ...w, day: newDay } : w)));
     };
 
     const handleDeleteDay = (id) => {
@@ -71,16 +44,13 @@ const BuildWorkout = () => {
     };
 
     const handleDeleteExercise = (dayId, index) => {
-        setWorkouts(
-            workouts.map((w) => {
-                if (w.id === dayId) {
-                    const updatedExercises = [...w.exercises];
-                    updatedExercises.splice(index, 1);
-                    return { ...w, exercises: updatedExercises };
-                }
-                return w;
-            })
-        );
+        setWorkouts(workouts.map((w) => {
+            if (w.id === dayId) {
+                const updatedExercises = w.exercises.filter((_, i) => i !== index);
+                return { ...w, exercises: updatedExercises };
+            }
+            return w;
+        }));
     };
 
     const openModal = (workoutId) => {
@@ -99,34 +69,23 @@ const BuildWorkout = () => {
 
     const handleAddExercise = () => {
         if (!selectedGroup || !selectedExercise || !activeWorkoutId) return;
-        setWorkouts(
-            workouts.map((w) => {
-                if (w.id === activeWorkoutId) {
-                    return {
-                        ...w,
-                        exercises: [
-                            ...w.exercises,
-                            { group: selectedGroup, name: selectedExercise },
-                        ],
-                    };
-                }
-                return w;
-            })
-        );
+        setWorkouts(workouts.map((w) => {
+            if (w.id === activeWorkoutId) {
+                return {
+                    ...w,
+                    exercises: [...w.exercises, { group: selectedGroup, name: selectedExercise }],
+                };
+            }
+            return w;
+        }));
         closeModal();
     };
 
     return (
         <div style={{ padding: '2rem' }}>
-            <Grid
-                container
-                spacing={2}
-                wrap="nowrap"
-                style={{ overflowX: 'auto' }}>
+            <Grid container spacing={2} wrap="nowrap" style={{ overflowX: 'auto' }}>
                 {workouts.map((workout) => (
-                    <Grid
-                        // item
-                        key={workout.id}>
+                    <Grid item key={workout.id}>
                         <Card style={{ minWidth: 300 }}>
                             <CardContent>
                                 <RenderButton
@@ -135,36 +94,16 @@ const BuildWorkout = () => {
                                     color="error"
                                     size="small"
                                     variant="outlined"
-                                    style={{
-                                        float: 'right',
-                                        marginBottom: '0.5rem',
-                                    }}
+                                    style={{ float: 'right', marginBottom: '0.5rem' }}
                                 />
-                                <FormControl fullWidth>
-                                    <InputLabel id={`day-label-${workout.id}`}>
-                                        Day
-                                    </InputLabel>
-                                    <Select
-                                        labelId={`day-label-${workout.id}`}
-                                        value={workout.day}
-                                        onChange={(e) =>
-                                            handleDayChange(
-                                                workout.id,
-                                                e.target.value
-                                            )
-                                        }
-                                        label="Day">
-                                        {dayOptions.map((day) => (
-                                            <MenuItem key={day} value={day}>
-                                                {day}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-
-                                <Typography
-                                    variant="h6"
-                                    style={{ marginTop: '1rem' }}>
+                                <RenderSelect
+                                    id={`day-${workout.id}`}
+                                    label="Day"
+                                    value={workout.day}
+                                    onChange={(e) => handleDayChange(workout.id, e.target.value)}
+                                    options={dayOptions}
+                                />
+                                <Typography variant="h6" style={{ marginTop: '1rem' }}>
                                     Exercises
                                 </Typography>
                                 {workout.exercises.map((exercise, idx) => (
@@ -172,22 +111,17 @@ const BuildWorkout = () => {
                                         container
                                         alignItems="center"
                                         justifyContent="space-between"
-                                        key={idx}>
+                                        key={idx}
+                                    >
                                         <Grid item>
                                             <Typography variant="body2">
-                                                {exercise.group} –{' '}
-                                                {exercise.name}
+                                                {exercise.group} – {exercise.name}
                                             </Typography>
                                         </Grid>
                                         <Grid item>
                                             <RenderButton
                                                 label="Delete"
-                                                onClick={() =>
-                                                    handleDeleteExercise(
-                                                        workout.id,
-                                                        idx
-                                                    )
-                                                }
+                                                onClick={() => handleDeleteExercise(workout.id, idx)}
                                                 variant="outlined"
                                                 color="error"
                                                 size="small"
@@ -207,7 +141,7 @@ const BuildWorkout = () => {
                         </Card>
                     </Grid>
                 ))}
-                <Grid>
+                <Grid item>
                     <RenderButton
                         label="Add Day"
                         onClick={handleAddDay}
@@ -220,57 +154,37 @@ const BuildWorkout = () => {
             <Dialog open={modalOpen} onClose={closeModal}>
                 <DialogTitle>Select Exercise</DialogTitle>
                 <DialogContent>
-                    <FormControl fullWidth margin="normal">
-                        <InputLabel id="group-label">
-                            Select Muscle Group
-                        </InputLabel>
-                        <Select
-                            labelId="group-label"
-                            value={selectedGroup}
-                            onChange={(e) => setSelectedGroup(e.target.value)}>
-                            {Object.keys(exerciseBank).map((group) => (
-                                <MenuItem key={group} value={group}>
-                                    {group}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-
+                    <RenderSelect
+                        id="group"
+                        label="Select Muscle Group"
+                        value={selectedGroup}
+                        onChange={(e) => setSelectedGroup(e.target.value)}
+                        options={Object.keys(exerciseBank)}
+                    />
                     {selectedGroup && (
-                        <FormControl fullWidth margin="normal">
-                            <InputLabel id="exercise-label">
-                                {' '}
-                                Select Exercise
-                            </InputLabel>
-                            <Select
-                                labelId="exercise-label"
-                                value={selectedExercise}
-                                onChange={(e) =>
-                                    setSelectedExercise(e.target.value)
-                                }>
-                                {exerciseBank[selectedGroup].map((exercise) => (
-                                    <MenuItem key={exercise} value={exercise}>
-                                        {exercise}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <RenderSelect
+                            id="exercise"
+                            label="Select Exercise"
+                            value={selectedExercise}
+                            onChange={(e) => setSelectedExercise(e.target.value)}
+                            options={exerciseBank[selectedGroup]}
+                        />
                     )}
                 </DialogContent>
                 <DialogActions>
-                    <Button
+                    <RenderButton
+                        label="Cancel"
                         onClick={closeModal}
                         variant="outlined"
-                        color="error">
-                        Cancel
-                    </Button>
-                    <Button
+                        color="error"
+                    />
+                    <RenderButton
+                        label="Add"
                         onClick={handleAddExercise}
                         variant="outlined"
                         color="primary"
-                        disabled={!selectedGroup || !selectedExercise}>
-                        Add
-                    </Button>
+                        disabled={!selectedGroup || !selectedExercise}
+                    />
                 </DialogActions>
             </Dialog>
         </div>
