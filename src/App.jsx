@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
-import Landing from './pages/Landing';
+// import Landing from './pages/Landing';
 import CurrentWorkout from './pages/CurrentWorkout';
 import Workouts from './pages/Workouts';
 import AddExercise from './pages/AddExercise';
@@ -12,7 +12,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
-                <Route index element={<Landing />} />
+                <Route index element={<CurrentWorkout />} />
                 <Route path="currentworkout" element={<CurrentWorkout />} />
                 <Route path="workouts" element={<Workouts />} />
                 <Route path="addexercise" element={<AddExercise />} />

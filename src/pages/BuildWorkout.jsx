@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import exerciseBank from '../data/exerciseBank';
+import user from '../data/user';
 import RenderButton from '../components/UI/RenderButton';
 import RenderSelect from '../components/UI/RenderSelect';
 import {
@@ -12,6 +14,8 @@ import {
     Typography,
     Grid,
 } from '@mui/material';
+import { buildWorkoutTemplate } from '../utils/buildWorkoutTemplate';
+import { TextField } from '@mui/material';
 
 const dayOptions = [
     'Monday',
@@ -29,6 +33,8 @@ const BuildWorkout = () => {
     const [activeWorkoutId, setActiveWorkoutId] = useState(null);
     const [selectedGroup, setSelectedGroup] = useState('');
     const [selectedExercise, setSelectedExercise] = useState('');
+    const [templateName, setTemplateName] = useState('');
+    const navigate = useNavigate();
 
     const handleAddDay = () => {
         const newId = workouts.length + 1;
@@ -81,11 +87,28 @@ const BuildWorkout = () => {
         closeModal();
     };
 
+    const handleSaveTemplate = () => {
+        if (!templateName.trim()) {
+            alert('Please enter a workout name.');
+            return;
+        }
+        const template = buildWorkoutTemplate(workouts, templateName);
+        
+        // Push to user.workoutTemplates
+        if (!user.workoutTemplates) {
+            user.workoutTemplates = [];
+        }
+        user.workoutTemplates.push(template);
+
+        setTemplateName('');
+        navigate('/workouts', { state: { message: 'Workout Template Saved Successfully!' }});
+    };
+
     return (
         <div style={{ padding: '2rem' }}>
             <Grid container spacing={2} wrap="nowrap" style={{ overflowX: 'auto' }}>
                 {workouts.map((workout) => (
-                    <Grid item key={workout.id}>
+                    <Grid key={workout.id}>
                         <Card style={{ minWidth: 300 }}>
                             <CardContent>
                                 <RenderButton
@@ -113,12 +136,12 @@ const BuildWorkout = () => {
                                         justifyContent="space-between"
                                         key={idx}
                                     >
-                                        <Grid item>
+                                        <Grid >
                                             <Typography variant="body2">
                                                 {exercise.group} – {exercise.name}
                                             </Typography>
                                         </Grid>
-                                        <Grid item>
+                                        <Grid >
                                             <RenderButton
                                                 label="Delete"
                                                 onClick={() => handleDeleteExercise(workout.id, idx)}
@@ -141,7 +164,7 @@ const BuildWorkout = () => {
                         </Card>
                     </Grid>
                 ))}
-                <Grid item>
+                <Grid >
                     <RenderButton
                         label="Add Day"
                         onClick={handleAddDay}
@@ -150,6 +173,23 @@ const BuildWorkout = () => {
                     />
                 </Grid>
             </Grid>
+
+            <div style={{ marginTop: '2rem' }}>
+                <TextField
+                    label="Workout Name"
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
+                    variant="outlined"
+                    size="small"
+                    style={{ marginRight: '1rem' }}
+                />
+                <RenderButton
+                    label="Save Workout Template"
+                    onClick={handleSaveTemplate}
+                    variant="contained"
+                    color="primary"
+                />
+            </div>
 
             <Dialog open={modalOpen} onClose={closeModal}>
                 <DialogTitle>Select Exercise</DialogTitle>
