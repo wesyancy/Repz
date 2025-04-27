@@ -9,26 +9,37 @@ import {
     ListItemIcon,
 } from '@mui/material';
 import Logo         from '../assets/logo.png';
-import adddumbbell  from '../assets/icons/addexercise.png';
+// import adddumbbell  from '../assets/icons/addexercise.png';
 import dumbbell     from '../assets/icons/currentworkout.png';
 import addworkout   from '../assets/icons/buildworkout.png';
 import folder       from '../assets/icons/workouts.png';
 import profile      from '../assets/icons/profile.png';
 import feedback     from '../assets/icons/feedback.png';
+import { useState } from 'react';
+import { useTheme, useMediaQuery, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Sidebar() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const [open, setOpen] = useState(true);
+    const collapsed = isMobile || !open;
+    const drawerWidth = 240;
+    const collapsedWidth = theme.spacing(10);
+
     return (
         <Drawer
             variant="permanent"
             sx={{
                 '& .MuiDrawer-paper': {
-                    width: 240,
-                    // marginRight: 240,
+                    width: collapsed ? collapsedWidth : drawerWidth,
                     boxSizing: 'border-box',
+                    overflowX: 'hidden',
                     backgroundColor: 'background.paper',
                     color: 'text.primary',
                     borderRight: '1px solid',
                     borderColor: 'divider',
+                    height: '100vh',
                 },
             }}>
             <Box
@@ -38,6 +49,11 @@ export default function Sidebar() {
                     height: '100%',
                     overflow: 'auto',
                 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-start', pl: 2, pt: 1, pb: 1 }}>
+                    <IconButton onClick={() => setOpen(o => !o)}>
+                        <MenuIcon />
+                    </IconButton>
+                </Box>
                 <NavLink
                     to="/"
                     style={{ textDecoration: 'none', color: 'inherit', letterSpacing: '2px', fontStyle: 'italic' }}>
@@ -56,9 +72,11 @@ export default function Sidebar() {
                                 borderRadius: '8px',
                             }}
                         />
-                        <Typography variant="h5" noWrap>
+                        {!collapsed && (
+                          <Typography variant="h5" noWrap>
                             LoadUP
-                        </Typography>
+                          </Typography>
+                        )}
                     </Box>
                 </NavLink>
 
@@ -70,20 +88,20 @@ export default function Sidebar() {
                                 icon: dumbbell,
                                 label: 'Current Workout',
                             },
+                            // {
+                            //     to: '/addexercise',
+                            //     icon: adddumbbell,
+                            //     label: 'Add Exercise',
+                            // },
                             {
                                 to: '/templates',
                                 icon: folder,
                                 label: 'Templates',
                             },
                             {
-                                to: '/addexercise',
-                                icon: adddumbbell,
-                                label: 'Add Exercise',
-                            },
-                            {
-                                to: '/buildworkout',
+                                to: '/buildtemplate',
                                 icon: addworkout,
-                                label: 'Build Workout',
+                                label: 'Build Template',
                             },
                         ].map((item) => (
                             <ListItem
@@ -100,14 +118,17 @@ export default function Sidebar() {
                                         backgroundColor: '#555'
                                     }
                                 }}>
-                                <ListItemIcon>
+                                <ListItemIcon sx={{ justifyContent: 'center', minWidth: 0 }}>
                                     <img
                                         src={item.icon}
                                         alt="sidebar icon"
-                                        style={{ height: 36 }}
+                                        style={{ height: 48, marginRight: 10 }}
                                     />
                                 </ListItemIcon>
-                                <ListItemText primary={item.label} />
+                                <ListItemText
+                                  primary={item.label}
+                                  sx={{ display: collapsed ? 'none' : 'block' }}
+                                />
                             </ListItem>
                         ))}
                     </List>
@@ -133,14 +154,17 @@ export default function Sidebar() {
                                     backgroundColor: 'action.selected',
                                 },
                             }}>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ justifyContent: 'center', minWidth: 0 }}>
                                 <img
                                     src={item.icon}
                                     alt="sidebar icon"
-                                    style={{ height: 24 }}
+                                    style={{ height: 48, marginRight: 10 }}
                                 />
                             </ListItemIcon>
-                            <ListItemText primary={item.label} />
+                            <ListItemText
+                              primary={item.label}
+                              sx={{ display: collapsed ? 'none' : 'block' }}
+                            />
                         </ListItem>
                     ))}
                 </List>

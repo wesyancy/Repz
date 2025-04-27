@@ -12,10 +12,13 @@ import {
 import user from '../data/user';
 import CompletionDialog from '../components/workouts/CompletionDialog';
 import SorenessDialog from '../components/workouts/SorenessDialog';
-import { loadActiveDay, completeWorkout, skipWorkout } from '../utils/currentWorkoutUtils';
+import {
+    loadActiveDay,
+    completeWorkout,
+    skipWorkout,
+} from '../utils/currentWorkoutUtils';
 
 const CurrentWorkout = () => {
-
     const [activeDay, setActiveDay] = useState(null);
     const [exerciseLogs, setExerciseLogs] = useState({});
     const [showSorenessDialog, setShowSorenessDialog] = useState(false);
@@ -86,10 +89,6 @@ const CurrentWorkout = () => {
 
     return (
         <div style={{ padding: '2rem' }}>
-            <Typography variant="h4" gutterBottom>
-                {activeDay.day}
-            </Typography>
-
             {workoutCompleted ? (
                 <>
                     <Typography variant="h5" color="primary" gutterBottom>
@@ -100,14 +99,27 @@ const CurrentWorkout = () => {
                         color="primary"
                         onClick={() => {
                             setWorkoutCompleted(false);
-                            loadActiveDay(activeTemplate, setActiveDay, setExerciseLogs);
+                            loadActiveDay(
+                                activeTemplate,
+                                setActiveDay,
+                                setExerciseLogs
+                            );
                         }}>
                         Start Next Workout
                     </Button>
                 </>
             ) : (
                 <>
-                    <Grid container direction="column" spacing={2}>
+                    <Grid
+                        container
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        spacing={4}
+                        style={{ padding: '2rem' }}>
+                        <Typography variant="h4" gutterBottom>
+                            {activeDay.day}
+                        </Typography>
                         {activeDay.exercises.map((exercise) => (
                             <Grid item key={exercise.name}>
                                 <Card>
@@ -171,7 +183,6 @@ const CurrentWorkout = () => {
                                                                 )
                                                             }
                                                         />
-                                                        Complete
                                                     </Grid>
                                                 </Grid>
                                             )
@@ -190,23 +201,45 @@ const CurrentWorkout = () => {
                             </Grid>
                         ))}
                     </Grid>
-
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        style={{ marginTop: '2rem' }}
-                        onClick={() => completeWorkout(user, activeTemplate, activeDay, exerciseLogs, setActiveTemplate, setWorkoutCompleted, setActiveDay)}
-                    >
-                        Complete Workout
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        style={{ marginTop: '2rem', marginLeft: '1rem' }}
-                        onClick={() => skipWorkout(activeTemplate, activeDay, setActiveTemplate, setWorkoutCompleted, setActiveDay)}
-                    >
-                        Skip Workout
-                    </Button>
+                    <Grid
+                        container
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="center"
+                        spacing={2}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            style={{ marginTop: '2rem' }}
+                            onClick={() =>
+                                completeWorkout(
+                                    user,
+                                    activeTemplate,
+                                    activeDay,
+                                    exerciseLogs,
+                                    setActiveTemplate,
+                                    setWorkoutCompleted,
+                                    setActiveDay
+                                )
+                            }>
+                            Complete Workout
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            style={{ marginTop: '2rem', marginLeft: '1rem' }}
+                            onClick={() =>
+                                skipWorkout(
+                                    activeTemplate,
+                                    activeDay,
+                                    setActiveTemplate,
+                                    setWorkoutCompleted,
+                                    setActiveDay
+                                )
+                            }>
+                            Skip Workout
+                        </Button>
+                    </Grid>
                 </>
             )}
 

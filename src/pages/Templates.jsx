@@ -33,7 +33,9 @@ export default function Templates() {
         user.workoutTemplates = updatedTemplates;
 
         // Navigate to the Current Workout page
-        navigate('/currentworkout', { state: { activeTemplate: updatedTemplates.find(t => t.isActive) } });
+        navigate('/currentworkout', {
+            state: { activeTemplate: updatedTemplates.find((t) => t.isActive) },
+        });
     };
 
     return (
@@ -62,8 +64,18 @@ export default function Templates() {
                 <Grid container spacing={2} style={{ marginTop: '1rem' }}>
                     {templates.map((template) => (
                         <Grid item key={template.id} xs={12} sm={6} md={4}>
-                            <Card>
-                                <CardContent>
+                            <Card
+                                style={{
+                                    width: '300px',
+                                    height: '400px',
+                                    overflow: 'hidden',
+                                }}>
+                                <CardContent
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        height: '100%',
+                                    }}>
                                     <Typography variant="h6" gutterBottom>
                                         {template.name}
                                     </Typography>
@@ -76,27 +88,36 @@ export default function Templates() {
                                             template.createdAt
                                         ).toLocaleDateString()}
                                     </Typography>
-                                    {template.data.map((dayObj) => (
-                                        <div
-                                            key={dayObj.day}
-                                            style={{ marginTop: '0.5rem' }}>
-                                            <Typography
-                                                variant="subtitle2"
-                                                color="primary">
-                                                {dayObj.day}
-                                            </Typography>
-                                            {dayObj.exercises.map(
-                                                (exercise, idx) => (
-                                                    <Typography
-                                                        key={idx}
-                                                        variant="body2">
-                                                        {exercise.muscleGroup}{' '}
-                                                        – {exercise.name}
-                                                    </Typography>
-                                                )
-                                            )}
-                                        </div>
-                                    ))}
+                                    <div
+                                        style={{
+                                            flexGrow: 1,
+                                            overflowY: 'auto',
+                                            marginBottom: '1rem',
+                                        }}>
+                                        {template.data.map((dayObj) => (
+                                            <div
+                                                key={dayObj.day}
+                                                style={{ marginTop: '0.5rem' }}>
+                                                <Typography
+                                                    variant="subtitle2"
+                                                    color="primary">
+                                                    {dayObj.day}
+                                                </Typography>
+                                                {dayObj.exercises.map(
+                                                    (exercise, idx) => (
+                                                        <Typography
+                                                            key={idx}
+                                                            variant="body2">
+                                                            {
+                                                                exercise.muscleGroup
+                                                            }{' '}
+                                                            – {exercise.name}
+                                                        </Typography>
+                                                    )
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
                                     <RenderButton
                                         label="Set Active"
                                         onClick={() =>

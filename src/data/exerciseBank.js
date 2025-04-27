@@ -323,6 +323,18 @@ const exerciseBank = {
         'Scissor Kicks',
         'Knee Raise',
     ],
+    FullBody: [
+        'Burpee',
+        'Mountain Climber',
+        'Jumping Jack',
+        'Bear Crawl',
+        'Inchworm',
+        'Tuck Jump',
+        'Spiderman Push-Up',
+        'Jump Squat',
+        'Plank to Downward Dog',
+        'High Knees'
+    ],
 };
 
 export default exerciseBank;

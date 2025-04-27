@@ -1,8 +1,8 @@
 let user = {
     mainInfo: {
-        username: null,
-        id: null,
-        email: null,
+        username: 'wesyancy',
+        id: '000001',
+        email: 'wesyancy@notyobusiness.com',
         passwordHash: null,
         createdAt: null,
         updatedAt: null,
@@ -49,27 +49,112 @@ let user = {
             isActive: false,
             data: [
                 {
-                    day: 'Tuesday',
+                    day: 'Sunday',
                     isActive: false,
                     exercises: [
                         { muscleGroup: 'Legs', name: 'Squat' },
                         { muscleGroup: 'Legs', name: 'Lunge' },
+                        { muscleGroup: 'Shoulders', name: 'Overhead Press' },
+                        { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
+                    ]
+                },
+                {
+                    day: 'Monday',
+                    isActive: false,
+                    exercises: [
+                        { muscleGroup: 'Shoulders', name: 'Overhead Press' },
+                        { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
+                        { muscleGroup: 'Legs', name: 'Deadlift' },
+                        { muscleGroup: 'Shoulders', name: 'Face Pull' },
+                    ]
+                },
+                {
+                    day: 'Tuesday',
+                    isActive: false,
+                    exercises: [
+                        { muscleGroup: 'Legs', name: 'Deadlift' },
+                        { muscleGroup: 'Shoulders', name: 'Face Pull' },
+                        { muscleGroup: 'Shoulders', name: 'Overhead Press' },
+                        { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
+                    ]
+                },
+                {
+                    day: 'Wednesday',
+                    isActive: false,
+                    exercises: [
+                        { muscleGroup: 'Legs', name: 'Squat' },
+                        { muscleGroup: 'Legs', name: 'Lunge' },
+                        { muscleGroup: 'Shoulders', name: 'Overhead Press' },
+                        { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
+                    ]
+                },
+                {
+                    day: 'Thursday',
+                    isActive: false,
+                    exercises: [
+                        { muscleGroup: 'Shoulders', name: 'Overhead Press' },
+                        { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
+                        { muscleGroup: 'Legs', name: 'Deadlift' },
+                        { muscleGroup: 'Shoulders', name: 'Face Pull' },
                     ]
                 },
                 {
                     day: 'Friday',
                     isActive: false,
                     exercises: [
+                        { muscleGroup: 'Legs', name: 'Deadlift' },
+                        { muscleGroup: 'Shoulders', name: 'Face Pull' },
                         { muscleGroup: 'Shoulders', name: 'Overhead Press' },
                         { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
                     ]
+                }
+            ]
+        },
+        {
+            id: 'template-003',
+            name: 'Full Body Circuit',
+            createdAt: '2025-04-15T18:00:00Z',
+            isActive: false,
+            data: [
+                {
+                    day: 'Wednesday',
+                    isActive: true,
+                    exercises: [
+                        { muscleGroup: 'Chest', name: 'Push-Up' },
+                        { muscleGroup: 'Legs', name: 'Squat' },
+                        { muscleGroup: 'FullBody', name: 'Burpee' },
+                    ]
                 },
                 {
-                    day: 'Sunday',
+                    day: 'Friday',
+                    isActive: true,
+                    exercises: [
+                        { muscleGroup: 'Legs', name: 'Lunge' },
+                        { muscleGroup: 'Abs', name: 'Plank' },
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'template-004',
+            name: 'Push Day',
+            createdAt: '2025-04-10T18:00:00Z',
+            isActive: false,
+            data: [
+                {
+                    day: 'Monday',
                     isActive: false,
                     exercises: [
-                        { muscleGroup: 'Legs', name: 'Deadlift' },
-                        { muscleGroup: 'Shoulders', name: 'Face Pull' },
+                        { muscleGroup: 'Shoulders', name: 'Overhead Press' },
+                        { muscleGroup: 'Triceps', name: 'Tricep Dip' },
+                    ]
+                },
+                {
+                    day: 'Thursday',
+                    isActive: true,
+                    exercises: [
+                        { muscleGroup: 'Chest', name: 'Push-Up' },
+                        { muscleGroup: 'Shoulders', name: 'Lateral Raise' },
                     ]
                 }
             ]
@@ -102,6 +187,7 @@ let user = {
                         pump: 3,
                         intensity: 4,
                         sets: [
+                            { reps: 10, weight: 115 },
                             { reps: 10, weight: 115 }
                         ]
                     },
@@ -113,6 +199,7 @@ let user = {
                         pump: 4,
                         intensity: 4,
                         sets: [
+                            { reps: 8, weight: 0 },
                             { reps: 8, weight: 0 }
                         ]
                     }
@@ -133,6 +220,7 @@ let user = {
                         pump: 3,
                         intensity: 4,
                         sets: [
+                            { reps: 10, weight: 115 },
                             { reps: 10, weight: 115 }
                         ]
                     },
@@ -144,6 +232,7 @@ let user = {
                         pump: 5,
                         intensity: 5,
                         sets: [
+                            { reps: 5, weight: 225 },
                             { reps: 5, weight: 225 }
                         ]
                     }
@@ -164,6 +253,7 @@ let user = {
                         pump: 5,
                         intensity: 5,
                         sets: [
+                            { reps: 8, weight: 225 },
                             { reps: 8, weight: 225 }
                         ]
                     },
@@ -175,7 +265,112 @@ let user = {
                         pump: 4,
                         intensity: 4,
                         sets: [
+                            { reps: 12, weight: 95 },
                             { reps: 12, weight: 95 }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            id: 'workout-004',
+            name: 'Full Body Circuit',
+            dateCompleted: '2025-04-24T18:00:00Z',
+            data: {
+                Wednesday: [
+                    {
+                        muscleGroup: 'Chest',
+                        name: 'Push-Up',
+                        soreness: 2,
+                        jointPain: 1,
+                        pump: 3,
+                        intensity: 4,
+                        sets: [
+                            { reps: 10, weight: 0 },
+                            { reps: 10, weight: 0 }
+                        ]
+                    },
+                    {
+                        muscleGroup: 'Legs',
+                        name: 'Squat',
+                        soreness: 3,
+                        jointPain: 2,
+                        pump: 4,
+                        intensity: 5,
+                        sets: [
+                            { reps: 8, weight: 135 },
+                            { reps: 8, weight: 135 }
+                        ]
+                    },
+                    {
+                        muscleGroup: 'FullBody',
+                        name: 'Burpee',
+                        soreness: 3,
+                        jointPain: 1,
+                        pump: 4,
+                        intensity: 5,
+                        sets: [
+                            { reps: 15, weight: 0 },
+                            { reps: 15, weight: 0 }
+                        ]
+                    }
+                ],
+                Friday: [
+                    {
+                        muscleGroup: 'Legs',
+                        name: 'Lunge',
+                        soreness: 2,
+                        jointPain: 1,
+                        pump: 3,
+                        intensity: 4,
+                        sets: [
+                            { reps: 12, weight: 95 },
+                            { reps: 12, weight: 95 }
+                        ]
+                    },
+                    {
+                        muscleGroup: 'Abs',
+                        name: 'Plank',
+                        soreness: 1,
+                        jointPain: 0,
+                        pump: 2,
+                        intensity: 3,
+                        sets: [
+                            { reps: 1, weight: 0 },
+                            { reps: 1, weight: 0 }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            id: 'workout-005',
+            name: 'Push Day',
+            dateCompleted: '2025-04-26T18:00:00Z',
+            data: {
+                Thursday: [
+                    {
+                        muscleGroup: 'Chest',
+                        name: 'Push-Up',
+                        soreness: 2,
+                        jointPain: 1,
+                        pump: 3,
+                        intensity: 4,
+                        sets: [
+                            { reps: 12, weight: 0 },
+                            { reps: 12, weight: 0 }
+                        ]
+                    },
+                    {
+                        muscleGroup: 'Shoulders',
+                        name: 'Lateral Raise',
+                        soreness: 2,
+                        jointPain: 1,
+                        pump: 3,
+                        intensity: 4,
+                        sets: [
+                            { reps: 15, weight: 20 },
+                            { reps: 15, weight: 20 }
                         ]
                     }
                 ]

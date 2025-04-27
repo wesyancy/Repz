@@ -27,8 +27,10 @@ const dayOptions = [
     'Sunday',
 ];
 
-const BuildWorkout = () => {
-    const [workouts, setWorkouts] = useState([{ id: 1, day: 'Monday', exercises: [] }]);
+const BuildTemplate = () => {
+    const [workouts, setWorkouts] = useState([
+        { id: 1, day: 'Monday', exercises: [] },
+    ]);
     const [modalOpen, setModalOpen] = useState(false);
     const [activeWorkoutId, setActiveWorkoutId] = useState(null);
     const [selectedGroup, setSelectedGroup] = useState('');
@@ -42,7 +44,9 @@ const BuildWorkout = () => {
     };
 
     const handleDayChange = (id, newDay) => {
-        setWorkouts(workouts.map((w) => (w.id === id ? { ...w, day: newDay } : w)));
+        setWorkouts(
+            workouts.map((w) => (w.id === id ? { ...w, day: newDay } : w))
+        );
     };
 
     const handleDeleteDay = (id) => {
@@ -50,13 +54,17 @@ const BuildWorkout = () => {
     };
 
     const handleDeleteExercise = (dayId, index) => {
-        setWorkouts(workouts.map((w) => {
-            if (w.id === dayId) {
-                const updatedExercises = w.exercises.filter((_, i) => i !== index);
-                return { ...w, exercises: updatedExercises };
-            }
-            return w;
-        }));
+        setWorkouts(
+            workouts.map((w) => {
+                if (w.id === dayId) {
+                    const updatedExercises = w.exercises.filter(
+                        (_, i) => i !== index
+                    );
+                    return { ...w, exercises: updatedExercises };
+                }
+                return w;
+            })
+        );
     };
 
     const openModal = (workoutId) => {
@@ -75,15 +83,20 @@ const BuildWorkout = () => {
 
     const handleAddExercise = () => {
         if (!selectedGroup || !selectedExercise || !activeWorkoutId) return;
-        setWorkouts(workouts.map((w) => {
-            if (w.id === activeWorkoutId) {
-                return {
-                    ...w,
-                    exercises: [...w.exercises, { group: selectedGroup, name: selectedExercise }],
-                };
-            }
-            return w;
-        }));
+        setWorkouts(
+            workouts.map((w) => {
+                if (w.id === activeWorkoutId) {
+                    return {
+                        ...w,
+                        exercises: [
+                            ...w.exercises,
+                            { group: selectedGroup, name: selectedExercise },
+                        ],
+                    };
+                }
+                return w;
+            })
+        );
         closeModal();
     };
 
@@ -93,7 +106,7 @@ const BuildWorkout = () => {
             return;
         }
         const template = buildWorkoutTemplate(workouts, templateName);
-        
+
         // Push to user.workoutTemplates
         if (!user.workoutTemplates) {
             user.workoutTemplates = [];
@@ -101,57 +114,112 @@ const BuildWorkout = () => {
         user.workoutTemplates.push(template);
 
         setTemplateName('');
-        navigate('/workouts', { state: { message: 'Workout Template Saved Successfully!' }});
+        navigate('/templates', {
+            state: { message: 'Workout Template Saved Successfully!' },
+        });
     };
 
     return (
         <div style={{ padding: '2rem' }}>
-            <Grid container spacing={2} wrap="nowrap" style={{ overflowX: 'auto' }}>
+            <div style={{ marginBottom: '2rem' }}>
+                <TextField
+                    label="Workout Name"
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
+                    variant="outlined"
+                    size="small"
+                    style={{ marginRight: '1rem' }}
+                />
+                <RenderButton
+                    label="Save Template"
+                    onClick={handleSaveTemplate}
+                    variant="outlined"
+                    color="primary"
+                    size="medium"
+                />
+            </div>
+            <Grid
+                container
+                spacing={2}
+                wrap="nowrap"
+                style={{ overflowX: 'auto' }}>
                 {workouts.map((workout) => (
                     <Grid key={workout.id}>
-                        <Card style={{ minWidth: 300 }}>
-                            <CardContent>
+                        <Card
+                            style={{
+                                width: '300px',
+                                height: '500px',
+                                overflow: 'hidden',
+                            }}>
+                            <CardContent
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: '100%',
+                                }}>
                                 <RenderButton
                                     label="Delete Day"
                                     onClick={() => handleDeleteDay(workout.id)}
                                     color="error"
                                     size="small"
                                     variant="outlined"
-                                    style={{ float: 'right', marginBottom: '0.5rem' }}
+                                    style={{
+                                        float: 'right',
+                                        marginBottom: '0.5rem',
+                                    }}
                                 />
                                 <RenderSelect
                                     id={`day-${workout.id}`}
                                     label="Day"
                                     value={workout.day}
-                                    onChange={(e) => handleDayChange(workout.id, e.target.value)}
+                                    onChange={(e) =>
+                                        handleDayChange(
+                                            workout.id,
+                                            e.target.value
+                                        )
+                                    }
                                     options={dayOptions}
                                 />
-                                <Typography variant="h6" style={{ marginTop: '1rem' }}>
+                                <Typography
+                                    variant="h6"
+                                    style={{ marginTop: '1rem' }}>
                                     Exercises
                                 </Typography>
-                                {workout.exercises.map((exercise, idx) => (
-                                    <Grid
-                                        container
-                                        alignItems="center"
-                                        justifyContent="space-between"
-                                        key={idx}
-                                    >
-                                        <Grid >
-                                            <Typography variant="body2">
-                                                {exercise.group} – {exercise.name}
-                                            </Typography>
+                                <div
+                                    style={{
+                                        flexGrow: 1,
+                                        overflowY: 'auto',
+                                        marginTop: '0.5rem',
+                                    }}>
+                                    {workout.exercises.map((exercise, idx) => (
+                                        <Grid
+                                            container
+                                            alignItems="center"
+                                            justifyContent="space-between"
+                                            key={idx}>
+                                            <Grid>
+                                                <Typography variant="body2">
+                                                    {exercise.group} –{' '}
+                                                    {exercise.name}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid>
+                                                <RenderButton
+                                                    label="Delete"
+                                                    onClick={() =>
+                                                        handleDeleteExercise(
+                                                            workout.id,
+                                                            idx
+                                                        )
+                                                    }
+                                                    variant="outlined"
+                                                    color="error"
+                                                    size="small"
+                                                />
+                                            </Grid>
                                         </Grid>
-                                        <Grid >
-                                            <RenderButton
-                                                label="Delete"
-                                                onClick={() => handleDeleteExercise(workout.id, idx)}
-                                                variant="outlined"
-                                                color="error"
-                                                size="small"
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                ))}
+                                    ))}
+                                </div>
                                 <RenderButton
                                     label="Add Exercise"
                                     onClick={() => openModal(workout.id)}
@@ -164,7 +232,7 @@ const BuildWorkout = () => {
                         </Card>
                     </Grid>
                 ))}
-                <Grid >
+                <Grid>
                     <RenderButton
                         label="Add Day"
                         onClick={handleAddDay}
@@ -173,24 +241,6 @@ const BuildWorkout = () => {
                     />
                 </Grid>
             </Grid>
-
-            <div style={{ marginTop: '2rem' }}>
-                <TextField
-                    label="Workout Name"
-                    value={templateName}
-                    onChange={(e) => setTemplateName(e.target.value)}
-                    variant="outlined"
-                    size="small"
-                    style={{ marginRight: '1rem' }}
-                />
-                <RenderButton
-                    label="Save Workout Template"
-                    onClick={handleSaveTemplate}
-                    variant="contained"
-                    color="primary"
-                />
-            </div>
-
             <Dialog open={modalOpen} onClose={closeModal}>
                 <DialogTitle>Select Exercise</DialogTitle>
                 <DialogContent>
@@ -206,7 +256,9 @@ const BuildWorkout = () => {
                             id="exercise"
                             label="Select Exercise"
                             value={selectedExercise}
-                            onChange={(e) => setSelectedExercise(e.target.value)}
+                            onChange={(e) =>
+                                setSelectedExercise(e.target.value)
+                            }
                             options={exerciseBank[selectedGroup]}
                         />
                     )}
@@ -231,4 +283,4 @@ const BuildWorkout = () => {
     );
 };
 
-export default BuildWorkout;
+export default BuildTemplate;

@@ -5,7 +5,7 @@ import CurrentWorkout from './pages/CurrentWorkout';
 import Templates from './pages/Templates';
 import AddExercise from './pages/AddExercise';
 import Profile from './pages/ProfileStats';
-import BuildWorkout from './pages/BuildWorkout';
+import BuildTemplate from './pages/BuildTemplate';
 import Feedback from './pages/Feedback';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
                 <Route path="currentworkout" element={<CurrentWorkout />} />
                 <Route path="templates" element={<Templates />} />
                 <Route path="addexercise" element={<AddExercise />} />
-                <Route path="buildworkout" element={<BuildWorkout />} />
+                <Route path="buildtemplate" element={<BuildTemplate />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="feedback" element={<Feedback />} />
             </Route>
