@@ -1,12 +1,107 @@
-# React + Vite
+# Repz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight React + Vite application for tracking workouts, managing templates, and viewing workout history. 
 
-Currently, two official plugins are available:
+Repz gives you:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Build Workouts** by day & exercise  
+- **Save & reuse** workout templates  
+- **Log workouts** with sets, reps, intensity, soreness, and joint-pain metrics  
+- **Profile Dashboard** with user info & per-exercise history  
+- **Collapsible, responsive sidebar** for navigation  
+- **In-app feedback** via a simple form  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node v16+  
+- npm or Yarn  
+
+### Installation
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-org/repz.git
+   cd repz
+# Repz
+
+A fast, minimalistic React + Vite app to build, save, and track workouts—with detailed logs and a responsive UI.
+
+## 🚀 Features
+
+- **Workout Builder**  
+  Create daily workouts by selecting days and exercises from a bank.
+
+- **Templates**  
+  Save and reuse workout templates; activate one to start logging.
+
+- **Workout Logging**  
+  Record sets, reps, weight, intensity, soreness, and joint pain for each exercise.
+
+- **Profile Dashboard**  
+  See user info (username, email, total workouts, most recent date, average intensity) and browse per-exercise history.
+
+- **Responsive Sidebar**  
+  Collapsible sidebar: full labels on desktop, icons-only on mobile.
+
+- **Feedback Form**  
+  Submit bug reports, feature requests, UX feedback, ratings, and comments.
+
+## 📦 Installation
+
+1. **Clone & install**  
+   ```bash
+   git clone https://github.com/your-org/repz.git
+   cd repz
+   npm install
+   # or yarn install
+   ```
+
+2. **Run development server**  
+   ```bash
+   npm run dev
+   # or yarn dev
+   ```
+   Open your browser at `http://localhost:5173` (default Vite port).
+
+## 🛠 Available Scripts
+
+- `npm run dev` — Start dev server with HMR  
+- `npm run build` — Build for production to `/dist`  
+- `npm run preview` — Preview production build locally  
+- `npm run lint` — Run ESLint checks
+
+## 📂 Project Structure
+
+```
+repz/
+├─ public/              
+│  └─ index.html        
+├─ src/
+│  ├─ assets/           # Logo, icons, and images
+│  ├─ components/       # UI: Sidebar, buttons, selects, dialogs
+│  ├─ data/             # Mock: exerciseBank.js, user.js
+│  ├─ pages/            # Pages: BuildTemplate, CurrentWorkout, Templates, ProfileStats, Feedback
+│  ├─ utils/            # Helpers: buildWorkoutTemplate.jsm currentWorkoutUtils.js
+│  ├─ App.jsx           # Routes & layout
+│  └─ main.jsx          # Entry point
+├─ .eslintrc.js         
+├─ vite.config.js       
+└─ package.json         
+```
+
+## 🔧 Configuration
+
+- **Exercise Bank**: Edit `src/data/exerciseBank.js`  
+- **User Data**: Swap `src/data/user.js` for real API integration  
+- **Theme**: Customize MUI theme in `App.jsx`
+
+## 🤝 Contributing
+
+1. Fork the repo  
+2. Create a branch: `git checkout -b feat/awesome`  
+3. Commit: `git commit -m "feat: add awesome feature"`  
+4. Push & open a PR
