@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 // import Landing from './pages/Landing';
 import CurrentWorkout from './pages/CurrentWorkout';
-import Workouts from './pages/Workouts';
+import Templates from './pages/Templates';
 import AddExercise from './pages/AddExercise';
 import Profile from './pages/ProfileStats';
 import BuildWorkout from './pages/BuildWorkout';
@@ -14,7 +14,7 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<CurrentWorkout />} />
                 <Route path="currentworkout" element={<CurrentWorkout />} />
-                <Route path="workouts" element={<Workouts />} />
+                <Route path="templates" element={<Templates />} />
                 <Route path="addexercise" element={<AddExercise />} />
                 <Route path="buildworkout" element={<BuildWorkout />} />
                 <Route path="profile" element={<Profile />} />

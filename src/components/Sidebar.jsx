@@ -71,9 +71,9 @@ export default function Sidebar() {
                                 label: 'Current Workout',
                             },
                             {
-                                to: '/workouts',
+                                to: '/templates',
                                 icon: folder,
-                                label: 'Workouts',
+                                label: 'Templates',
                             },
                             {
                                 to: '/addexercise',

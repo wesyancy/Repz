@@ -6,21 +6,15 @@ export const buildWorkoutTemplate = (workouts, workoutName) => {
         name: `${workoutName}`,
         createdAt: new Date(timestamp).toISOString(),
         isActive: false,
-        data: {}
-    };
-
-    workouts.forEach(({ day, exercises }) => {
-        if (!workoutTemplate.data[day]) {
-            workoutTemplate.data[day] = [];
-        }
-
-        exercises.forEach(({ group, name }) => {
-            workoutTemplate.data[day].push({
+        data: workouts.map(({ day, exercises }) => ({
+            day,
+            isActive: false,
+            exercises: exercises.map(({ group, name }) => ({
                 muscleGroup: group,
                 name
-            });
-        });
-    });
+            }))
+        }))
+    };
 
     return workoutTemplate;
 };
