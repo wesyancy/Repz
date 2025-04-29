@@ -15,7 +15,6 @@ function App() {
                 <Route index element={<CurrentWorkout />} />
                 <Route path="currentworkout" element={<CurrentWorkout />} />
                 <Route path="templates" element={<Templates />} />
-                {/* <Route path="addexercise" element={<AddExercise />} /> */}
                 <Route path="buildtemplate" element={<BuildTemplate />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="feedback" element={<Feedback />} />
