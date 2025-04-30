@@ -105,3 +105,18 @@ repz/
 2. Create a branch: `git checkout -b feat/awesome`  
 3. Commit: `git commit -m "feat: add awesome feature"`  
 4. Push & open a PR
+
+
+
+## 🐛 Known Bugs
+
+1. The 'Set Active' button on the templates page does not properly function for any template but the first one.
+2. 
+
+
+## Features to Come
+
+1. Have the app pre-populate the placeholder weight and reps based off of last workout's numbers
+2. Dynamic re-setting of sets, reps and weight based off of feedback metrics gathered from user
+3. Ability to change weight in real time and have the app recalculate the reps consequently
+4. 
