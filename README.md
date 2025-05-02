@@ -1,4 +1,4 @@
-# Repz
+# LoadUP (formerly Repz)
 
 A lightweight React + Vite application for tracking workouts, managing templates, and viewing workout history. 
 
