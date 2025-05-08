@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import './MenuBar.css'
 import {
     Drawer,
     List,
@@ -15,11 +16,12 @@ import addworkout   from '../assets/icons/buildworkout.png';
 import folder       from '../assets/icons/workouts.png';
 import profile      from '../assets/icons/profile.png';
 import feedback     from '../assets/icons/feedback.png';
+import user     from '../data/user';
 import { useState } from 'react';
 import { useTheme, useMediaQuery, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-export default function Sidebar() {
+export default function MenuBar() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [open, setOpen] = useState(true);
@@ -27,28 +29,12 @@ export default function Sidebar() {
     const drawerWidth = 240;
     const collapsedWidth = theme.spacing(10);
 
+    console.table(user)
+    console.log(user)
+
     return (
-        <Drawer
-            variant="permanent"
-            sx={{
-                '& .MuiDrawer-paper': {
-                    width: collapsed ? collapsedWidth : drawerWidth,
-                    boxSizing: 'border-box',
-                    overflowX: 'hidden',
-                    backgroundColor: 'background.paper',
-                    color: 'text.primary',
-                    borderRight: '1px solid',
-                    borderColor: 'divider',
-                    height: '100vh',
-                },
-            }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                    overflow: 'auto',
-                }}>
+        <div className='MenuBarDrawer'>
+            <div className='MenuBarBox1'>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start', pl: 2, pt: 1, pb: 1 }}>
                     <IconButton onClick={() => setOpen(o => !o)}>
                         <MenuIcon />
@@ -121,7 +107,7 @@ export default function Sidebar() {
                                 <ListItemIcon sx={{ justifyContent: 'center', minWidth: 0 }}>
                                     <img
                                         src={item.icon}
-                                        alt="sidebar icon"
+                                        alt="MenuBar icon"
                                         style={{ height: 48, marginRight: 10 }}
                                     />
                                 </ListItemIcon>
@@ -157,7 +143,7 @@ export default function Sidebar() {
                             <ListItemIcon sx={{ justifyContent: 'center', minWidth: 0 }}>
                                 <img
                                     src={item.icon}
-                                    alt="sidebar icon"
+                                    alt="MenuBar icon"
                                     style={{ height: 48, marginRight: 10 }}
                                 />
                             </ListItemIcon>
@@ -168,7 +154,7 @@ export default function Sidebar() {
                         </ListItem>
                     ))}
                 </List>
-            </Box>
-        </Drawer>
+            </div>
+        </div>
     );
 }

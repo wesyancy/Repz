@@ -8,7 +8,7 @@ Repz gives you:
 - **Save & reuse** workout templates  
 - **Log workouts** with sets, reps, intensity, soreness, and joint-pain metrics  
 - **Profile Dashboard** with user info & per-exercise history  
-- **Collapsible, responsive sidebar** for navigation  
+- **Collapsible, responsive MenuBar** for navigation  
 - **In-app feedback** via a simple form  
 
 ---
@@ -44,8 +44,8 @@ A fast, minimalistic React + Vite app to build, save, and track workouts—with 
 - **Profile Dashboard**  
   See user info (username, email, total workouts, most recent date, average intensity) and browse per-exercise history.
 
-- **Responsive Sidebar**  
-  Collapsible sidebar: full labels on desktop, icons-only on mobile.
+- **Responsive MenuBar**  
+  Collapsible MenuBar: full labels on desktop, icons-only on mobile.
 
 - **Feedback Form**  
   Submit bug reports, feature requests, UX feedback, ratings, and comments.
@@ -82,7 +82,7 @@ repz/
 │  └─ index.html        
 ├─ src/
 │  ├─ assets/           # Logo, icons, and images
-│  ├─ components/       # UI: Sidebar, buttons, selects, dialogs
+│  ├─ components/       # UI: MenuBar, buttons, selects, dialogs
 │  ├─ data/             # Mock: exerciseBank.js, user.js
 │  ├─ pages/            # Pages: BuildTemplate, CurrentWorkout, Templates, ProfileStats, Feedback
 │  ├─ utils/            # Helpers: buildWorkoutTemplate.jsm currentWorkoutUtils.js

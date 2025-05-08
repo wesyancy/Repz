@@ -5,7 +5,7 @@ import CurrentWorkout from './pages/CurrentWorkout';
 import Templates from './pages/Templates';
 // import AddExercise from './pages/AddExercise';
 import Profile from './pages/ProfileStats';
-import BuildTemplate from './pages/BuildTemplate';
+import BuildTemplate from './pages/BuildTemplate/BuildTemplate';
 import Feedback from './pages/Feedback';
 
 function App() {
